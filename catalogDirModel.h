@@ -71,15 +71,19 @@ public:
      * \return a CatalogEntry for the given @p index
      */
     CatalogEntry entry( const QModelIndex & index ) const;
+
 protected:
     virtual QVariant data( const QModelIndex & index, int role = Qt::DisplayRole ) const;
     virtual int columnCount( const QModelIndex & parent = QModelIndex() ) const;
     virtual QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
     //virtual Qt::ItemFlags flags( const QModelIndex & index ) const;
+
 public slots:
     void reload();
+
 private slots:
     void slotFileChanged( const QString & path );
+
 private:
     /// root directory
     QString m_rootDir;

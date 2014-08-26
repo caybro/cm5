@@ -99,15 +99,12 @@ QVariant CatalogDirModel::data( const QModelIndex & index, int role ) const
                 }
             }
 
-            //if ( !m_catalogHash.contains( key ) )
-            {
-                CatalogEntry entry;
-                entry.fuzzy = fuzzy;
-                entry.translated = translated;
-                entry.untranslated = untranslated;
-                entry.total = total;
-                m_catalogHash.insert( key, entry );
-            }
+            CatalogEntry entry;
+            entry.fuzzy = fuzzy;
+            entry.translated = translated;
+            entry.untranslated = untranslated;
+            entry.total = total;
+            m_catalogHash.insert( key, entry );
         }
 
         CatalogEntry cachedEntry = m_catalogHash.value( key );
@@ -119,11 +116,10 @@ QVariant CatalogDirModel::data( const QModelIndex & index, int role ) const
         {
             if ( role == FileIconRole )
             {
-                if ( isdir )
-                    return QIcon( ":/icons/icons/folder.png" );
-                else
-                {
-                    return finished ? QIcon( ":/icons/icons/flag-green.png" ) : QIcon( ":/icons/icons/flag-red.png" );
+                if ( isdir ) {
+                    return QIcon::fromTheme("folder"); // TODO expanded folder icon too
+                } else {
+                    return finished ? QIcon::fromTheme("flag-green") : QIcon::fromTheme("flag-red");
                 }
             }
             if ( role == FilePathRole )
@@ -181,7 +177,7 @@ QVariant CatalogDirModel::headerData( int section, Qt::Orientation orientation, 
         default: return QVariant();
         }
     }
-    return QAbstractItemModel::headerData( section, orientation, role );
+    return QDirModel::headerData( section, orientation, role );
 }
 
 #if 0

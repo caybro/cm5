@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////
 // mainwindow.cpp                                                       //
 //                                                                      //
-// Copyright (C)  2007  Lukas Tinkl <lukas@kde.org>                     //
+// Copyright (C)  2007, 2014  Lukas Tinkl <lukas@kde.org>               //
 //                                                                      //
 // This program is free software; you can redistribute it and/or        //
 // modify it under the terms of the GNU General Public License          //
@@ -19,7 +19,11 @@
 // 02110-1301, USA.                                                     //
 //////////////////////////////////////////////////////////////////////////
 
-#include <QtGui>
+#include <QMainWindow>
+#include <QSettings>
+#include <QMessageBox>
+#include <QProcess>
+#include <QFileDialog>
 
 #include "mainwindow.h"
 
@@ -51,10 +55,10 @@ MainWindow::MainWindow( QWidget * parent )
              this, SLOT( slotConfigure() ) );
 
     // view
-    connect( ui.catalogView, SIGNAL( pressed( const QModelIndex & ) ),
+    connect( ui.catalogView, SIGNAL( clicked( const QModelIndex & ) ),
              this, SLOT( slotCatalogChanged( const QModelIndex & ) ) );
 
-    connect( ui.catalogView, SIGNAL( activated( const QModelIndex & ) ),
+    connect( ui.catalogView, SIGNAL( doubleClicked( const QModelIndex & ) ),
              this, SLOT( slotCatalogDoubleClicked( const QModelIndex & ) ) );
 
     connect( ui.catalogView, SIGNAL( customContextMenuRequested ( const QPoint & ) ),
@@ -115,8 +119,7 @@ void MainWindow::slotAbout()
 {
     QMessageBox::about( this, tr( "Catalog Manager" ),
                         tr( "<b>Catalog Manager %1</b><br>"
-                            "Proof-of-concept port of original KBabel's catalog manager to Qt 4.<br>"
-                            "Written during SUSE/Novell Hack Week, 25-30th June 2007<br>"
+                            "Proof-of-concept port of original KBabel's catalog manager to Qt 5.<br>"
                             "Author: %2" ).arg( qApp->applicationVersion() )
                         .arg( "Lukas Tinkl <a href=\"mailto:lukas@kde.org\">lukas@kde.org</a>" ) );
 }

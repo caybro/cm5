@@ -1,10 +1,10 @@
 HEADERS     = mainwindow.h catalogDirModel.h
 FORMS       = mainwindow.ui
 SOURCES     = mainwindow.cpp catalogDirModel.cpp main.cpp
-RESOURCES   = cm4.qrc
-TRANSLATIONS= cm4_cs.ts
-#QT          += network xml
+RESOURCES   = cm5.qrc
+TRANSLATIONS = cm5_cs.ts
+QT          += widgets
 DISTFILES   += ./icons/*
-CONFIG      += qt debug
-VERSION     = 1.1
+CONFIG      += debug
+VERSION     = 1.0
 DEFINES     += VERSION_NUMBER=\\\"$${VERSION}\\\" 

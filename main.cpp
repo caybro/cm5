@@ -29,13 +29,13 @@
 int main( int argc, char *argv[] )
 {
     QApplication app( argc, argv );
-    app.setOrganizationName( "kde.org" );
+    app.setOrganizationName( "KDE" );
     app.setOrganizationDomain( "kde.org" );
-    app.setApplicationName( "cm4" );
+    app.setApplicationName( "cm5" );
     app.setApplicationVersion( VERSION_NUMBER );
 
     QTranslator translator;
-    translator.load( ":/translations/cm4_" + QLocale::system().name() );
+    translator.load( ":/translations/cm5_" + QLocale::system().name() );
     app.installTranslator( &translator );
 
     MainWindow mw;
