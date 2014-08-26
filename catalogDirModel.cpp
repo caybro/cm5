@@ -32,11 +32,10 @@
 CatalogDirModel::CatalogDirModel( const QString & rootDir, QObject * parent )
     : QDirModel( parent ), m_rootDir( rootDir )
 {
-    m_watcher = new QFileSystemWatcher( QStringList( rootDir ), this );
+    m_watcher = new QFileSystemWatcher( QStringList( m_rootDir ), this );
 
     setNameFilters( QStringList( "*.po" ) );
     setFilter( QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot );
-    //setReadOnly( false );
 
     connect( m_watcher, SIGNAL( fileChanged( const QString & ) ),
              this, SLOT( slotFileChanged( const QString & ) ) );
@@ -56,8 +55,8 @@ QVariant CatalogDirModel::data( const QModelIndex & index, int role ) const
         return QVariant();
 
     const QString filename = filePath( index );
-    bool isdir = isDir( index );
-    qint64 key = qHash( filename );
+    const bool isdir = isDir( index );
+    const uint key = qHash( filename );
     bool finished = false;
 
     if ( role == Qt::DisplayRole || role == FileIconRole || role == FilePathRole || role == FileNameRole )
@@ -218,7 +217,7 @@ QString CatalogDirModel::msgStats( const QString & file ) const
                 + QFile::encodeName( tmp.fileName() ) );
 
         QTextStream stream( &tmp );
-        QString result = stream.readAll();
+        const QString result = stream.readAll();
         //qDebug() << "Result for " << file << " is: " << result;
         return result;
     }
@@ -235,7 +234,7 @@ QString CatalogDirModel::lastTranslator( const QString & filename ) const
     QTextStream in( &file );
     while ( !in.atEnd() )
     {
-        QString line = in.readLine();
+        const QString line = in.readLine();
         if ( line.contains( "Last-Translator:" ) )
         {
             file.close();
@@ -256,7 +255,7 @@ QString CatalogDirModel::svnStatus( const QString & filename ) const
                 + QFile::encodeName( tmp.fileName() ) );
 
         QTextStream stream( &tmp );
-        QString line = stream.readLine();
+        const QString line = stream.readLine();
         //qDebug() << "SVN status for " << filename << " is: " << line;
 
         if ( line.startsWith( "M" ) )

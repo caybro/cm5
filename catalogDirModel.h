@@ -35,7 +35,6 @@ struct CatalogEntry
 {
     QString parentDir;
     int translated, fuzzy, untranslated, total;
-    //QDateTime lastRevision;
     QString lastTranslator;
     QString status;
 };

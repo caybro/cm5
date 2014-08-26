@@ -33,6 +33,7 @@ int main( int argc, char *argv[] )
     app.setOrganizationDomain( "kde.org" );
     app.setApplicationName( "cm5" );
     app.setApplicationVersion( VERSION_NUMBER );
+    app.setWindowIcon(QIcon::fromTheme("applications-development-translation"));
 
     QTranslator translator;
     translator.load( ":/translations/cm5_" + QLocale::system().name() );

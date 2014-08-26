@@ -121,7 +121,7 @@ void MainWindow::slotAbout()
                         tr( "<b>Catalog Manager %1</b><br>"
                             "Proof-of-concept port of original KBabel's catalog manager to Qt 5.<br>"
                             "Author: %2" ).arg( qApp->applicationVersion() )
-                        .arg( "Lukas Tinkl <a href=\"mailto:lukas@kde.org\">lukas@kde.org</a>" ) );
+                        .arg( "Lukáš Tinkl <a href=\"mailto:lukas@kde.org\">lukas@kde.org</a>" ) );
 }
 
 void MainWindow::slotCatalogDoubleClicked( const QModelIndex & index )
@@ -133,7 +133,7 @@ void MainWindow::slotCatalogDoubleClicked( const QModelIndex & index )
         return;
     }
 
-    QString path = m_model->filePath( index );
+    const QString path = m_model->filePath( index );
 
     QProcess::startDetached( m_editor, QStringList( path ) );
 }
@@ -184,20 +184,20 @@ void MainWindow::slotStatistics()
 
     CatalogEntry entry = m_model->entry( currIndex );
 
-    int untranslated = entry.untranslated;
-    int translated = entry.translated;
-    int fuzzy = entry.fuzzy;
-    int total = entry.total;
+    const int untranslated = entry.untranslated;
+    const int translated = entry.translated;
+    const int fuzzy = entry.fuzzy;
+    const int total = entry.total;
 
-    QString message = tr( "Translation statistics for: <em>%1</em><br><br>"
-                          "Untranslated: %2 (%3%)<br>"
-                          "Translated: %4 (%5%)<br>"
-                          "Fuzzy: %6 (%7%)<br>"
-                          "Total: %8" ).arg( m_model->fileName( currIndex ) )
-                      .arg( untranslated ).arg( formatNumber( ( float )untranslated / total * 100.0 ) )
-                      .arg( translated ).arg( formatNumber(  ( float )translated / total * 100.0 ) )
-                      .arg( fuzzy ).arg( formatNumber( ( float )fuzzy / total * 100.0 ) )
-                      .arg( total );
+    const QString message = tr( "Translation statistics for: <em>%1</em><br><br>"
+                                "Untranslated: %2 (%3%)<br>"
+                                "Translated: %4 (%5%)<br>"
+                                "Fuzzy: %6 (%7%)<br>"
+                                "Total: %8" ).arg( m_model->fileName( currIndex ) )
+                            .arg( untranslated ).arg( formatNumber( ( float )untranslated / total * 100.0 ) )
+                            .arg( translated ).arg( formatNumber(  ( float )translated / total * 100.0 ) )
+                            .arg( fuzzy ).arg( formatNumber( ( float )fuzzy / total * 100.0 ) )
+                            .arg( total );
 
     QMessageBox::information( this, tr( "Translation Statistics" ), message );
 }
@@ -209,7 +209,7 @@ QString MainWindow::formatNumber( double num, int prec ) const
 
 void MainWindow::slotConfigure()
 {
-    QString rootdir = QFileDialog::getExistingDirectory( this, tr( "Root Directory" ), QDir::homePath() );
+    const QString rootdir = QFileDialog::getExistingDirectory( this, tr( "Root Directory" ), QDir::homePath() );
 
     if ( !rootdir.isEmpty() )
     {
