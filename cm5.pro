@@ -1,6 +1,9 @@
-HEADERS     = mainwindow.h catalogDirModel.h
-FORMS       = mainwindow.ui
-SOURCES     = mainwindow.cpp catalogDirModel.cpp main.cpp
+HEADERS     = mainwindow.h catalogDirModel.h \
+    configdlg.h
+FORMS       = mainwindow.ui \
+    configdlg.ui
+SOURCES     = mainwindow.cpp catalogDirModel.cpp main.cpp \
+    configdlg.cpp
 RESOURCES   = cm5.qrc
 TRANSLATIONS = cm5_cs.ts
 QT          += widgets

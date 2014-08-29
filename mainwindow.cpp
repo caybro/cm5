@@ -26,6 +26,7 @@
 #include <QFileDialog>
 
 #include "mainwindow.h"
+#include "configdlg.h"
 
 
 MainWindow::MainWindow( QWidget * parent )
@@ -86,8 +87,7 @@ void MainWindow::loadSettings()
 
     settings.beginGroup( "MainWindow" );
     restoreState( settings.value( "state" ).toByteArray() );
-    resize( settings.value( "size", QSize( 400, 400 ) ).toSize() );
-    move( settings.value( "pos", QPoint( 200, 200) ).toPoint() );
+    restoreGeometry(settings.value("geometry").toByteArray());
     settings.endGroup();
 
     settings.beginGroup( "CatalogManager" );
@@ -104,8 +104,7 @@ void MainWindow::saveSettings()
 
     settings.beginGroup( "MainWindow" );
     settings.setValue( "state", saveState() );
-    settings.setValue( "size", size() );
-    settings.setValue( "pos", pos() );
+    settings.setValue("geometry", saveGeometry());
     settings.endGroup();
 
     settings.beginGroup( "CatalogManager" );
@@ -209,13 +208,13 @@ QString MainWindow::formatNumber( double num, int prec ) const
 
 void MainWindow::slotConfigure()
 {
-    const QString rootdir = QFileDialog::getExistingDirectory( this, tr( "Root Directory" ), QDir::homePath() );
+    ConfigDlg * dlg = new ConfigDlg(m_rootdir, m_editor, this);
 
-    if ( !rootdir.isEmpty() )
-    {
-        m_rootdir = rootdir;
-        m_model->setRootDir( m_rootdir );
-        ui.catalogView->setRootIndex( m_model->rootIndex() );
+    if (dlg->exec() == QDialog::Accepted) {
+        m_editor = dlg->editor();
+        m_rootdir = dlg->rootDir();
+        m_model->setRootDir(m_rootdir);
+        ui.catalogView->setRootIndex(m_model->rootIndex());
         updateCaption();
     }
 }
