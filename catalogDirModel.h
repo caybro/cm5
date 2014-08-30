@@ -25,7 +25,6 @@
 
 #include <QDirModel>
 #include <QHash>
-#include <QDateTime>
 #include <QFileSystemWatcher>
 
 /**

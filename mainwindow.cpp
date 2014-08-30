@@ -32,7 +32,7 @@
 MainWindow::MainWindow( QWidget * parent )
     : QMainWindow( parent )
 {
-    m_model = new CatalogDirModel( "/home/lukas/svn/KDE/3.5/l10n/cs/messages/", this );
+    m_model = new CatalogDirModel( QString(), this );
 
     // GUI
     ui.setupUi( this );
