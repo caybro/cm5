@@ -24,6 +24,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QFileDialog>
+#include <QDebug>
 
 #include "mainwindow.h"
 #include "configdlg.h"
@@ -64,6 +65,8 @@ MainWindow::MainWindow( QWidget * parent )
 
     connect( ui.catalogView, SIGNAL( customContextMenuRequested ( const QPoint & ) ),
              this, SLOT( slotCatalogContextMenu( const QPoint & ) ) );
+
+    connect(ui.filter, &QLineEdit::textChanged, this, &MainWindow::filterChanged);
 
     loadSettings();
 
@@ -217,6 +220,14 @@ void MainWindow::slotConfigure()
         ui.catalogView->setRootIndex(m_model->rootIndex());
         updateCaption();
     }
+}
+
+void MainWindow::filterChanged(const QString &text)
+{
+    if (!text.isEmpty())
+        m_model->setNameFilters(QStringList() << QStringLiteral("*%1*.po").arg(text));
+    else
+        m_model->setNameFilters(QStringList("*.po"));
 }
 
 void MainWindow::updateCaption()

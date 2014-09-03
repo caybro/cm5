@@ -16,6 +16,13 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout">
     <item>
+     <widget class="QLineEdit" name="filter">
+      <property name="clearButtonEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QTreeView" name="catalogView">
       <property name="contextMenuPolicy">
        <enum>Qt::CustomContextMenu</enum>
@@ -129,7 +136,9 @@
   </action>
   <action name="action_Replace_in_files">
    <property name="icon">
-    <iconset theme="edit-find-replace"/>
+    <iconset theme="edit-find-replace">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>&amp;Replace in files...</string>
@@ -155,7 +164,9 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset theme="help-about"/>
+    <iconset theme="help-about">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>&amp;About...</string>
@@ -221,6 +232,10 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>filter</tabstop>
+  <tabstop>catalogView</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

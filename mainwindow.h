@@ -50,6 +50,10 @@ private slots:
     void slotSpellcheck();
     void slotStatistics();
     void slotConfigure();
+
+private slots:
+    void filterChanged(const QString & text);
+
 private:
     QString formatNumber( double num, int prec = 2 ) const;
     void updateCaption();
